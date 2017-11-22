@@ -1,0 +1,62 @@
+buildscript {
+    ext {
+        springBootVersion = "1.5.4.RELEASE"
+        springfoxVersion = '2.7.0'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: "io.spring.dependency-management"
+
+version = "${project.ext.properties.appVersion?: '0.0.0'}"
+
+jar {
+    baseName = "fish-tank"
+    version = version
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url("https://repo.spring.io/libs-milestone")
+    }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.projectlombok:lombok:1.16.12")
+    compile("org.slf4j:slf4j-api:1.7.24")
+    compile("io.springfox:springfox-swagger2:$springfoxVersion")
+    compile("io.springfox:springfox-swagger-ui:$springfoxVersion")
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:rawtypes" << "-Werror"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR5"
+    }
+}
+
+springBoot  {
+    buildInfo{
+        additionalProperties = [
+                "version" : version
+        ]
+    }
+}

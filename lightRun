@@ -1,0 +1,1 @@
+java -Xmx512m -Xss1024k -jar build/libs/*.jar
