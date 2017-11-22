@@ -1,6 +1,7 @@
 package com.fishtank.controller;
 
 import com.fishtank.model.Actor;
+import com.fishtank.model.Component;
 import com.fishtank.service.ActorService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -38,7 +39,10 @@ public class ActorController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ApiOperation(value = "Add an Actor to main loop")
-    public HttpStatus add(Actor actor) {
+    public HttpStatus add(Actor actor, List<Component> componentList) {
+        if (!componentList.isEmpty())
+            actor.setComponentList(componentList);
+
         actorService.getActorList().add(actor);
         return HttpStatus.ACCEPTED;
     }
