@@ -1,6 +1,5 @@
 package com.fishtank.model;
 
-public interface Component {
+public abstract class Component {
 
-    void run();
 }

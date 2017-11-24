@@ -1,6 +1,7 @@
 package com.fishtank.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
@@ -16,8 +17,8 @@ public class Actor {
     private List<Component> componentList;
     private Map<String, Component> componentMap;
 
-    public Actor(String name) {
-        this.name = name;
+    public Actor() {
+        name = null;
         componentList = new ArrayList<Component>();
         componentMap = new HashMap<String, Component>();
     }

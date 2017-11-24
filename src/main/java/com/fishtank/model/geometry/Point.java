@@ -1,13 +1,16 @@
 package com.fishtank.model.geometry;
 
+import com.fishtank.model.Component;
+import com.fishtank.service.ComponentService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class Point {
+public class Point extends Component {
     private double x;
     private double y;
 

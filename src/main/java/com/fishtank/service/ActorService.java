@@ -1,5 +1,6 @@
 package com.fishtank.service;
 
+import com.fishtank.event.ActorCreatedEvent;
 import com.fishtank.model.Actor;
 import lombok.Getter;
 import lombok.NonNull;
@@ -26,6 +27,7 @@ public class ActorService {
 
     public void addActor(Actor actor) {
         actorList.add(actor);
-        publisher.publishEvent();
+        ActorCreatedEvent actorCreatedEvent = new ActorCreatedEvent(this, actor);
+        publisher.publishEvent(actorCreatedEvent);
     }
 }
